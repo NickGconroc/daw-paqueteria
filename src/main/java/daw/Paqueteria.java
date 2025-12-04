@@ -23,10 +23,10 @@ public class Paqueteria {
     // Si el peso está entre 5kg (incluido) y 10kg (excluido), suma 5€ al precio.
     // Si el peso es mayor o igual a 10kg, suma 10€ al precio.
     // Retorno: El precio final (double).
-   
 
-    public double calcularTarifaEnvio(double peso, String zona) {
-        // Validación del peso
+    public static double calcularTarifaEnvio(double peso, String zona) {
+        // Si el peso es menor o igual a 0, debe lanzar una excepción o devolver un
+        // código de error. Para simplificar esta práctica: devuelve -1.
         if (peso <= 0) {
 
             return -1;
@@ -34,7 +34,12 @@ public class Paqueteria {
 
         double precioBase;
 
-        // Evaluación de la zona mediante switch
+        // / Utiliza una estructura switch para evaluar la zona:
+        // "A": Precio base 10€.
+        // "B": Precio base 15€.
+        // "C": Precio base 20€.
+        // Cualquier otra zona: devuelve -1 (zona no válida).
+        // Utiliza estructuras condicionales:
         switch (zona) {
             case "A":
                 precioBase = 10;
@@ -49,7 +54,10 @@ public class Paqueteria {
                 return -1; // Zona no válida
         }
 
-        // Cálculo de suplementos según el peso
+        // Si el peso es menor a 5kg, no hay suplemento.
+        // Si el peso está entre 5kg (incluido) y 10kg (excluido), suma 5€ al precio.
+        // Si el peso es mayor o igual a 10kg, suma 10€ al precio.
+     
         if (peso < 5) {
             // No hay suplemento
         } else if (peso >= 5 && peso < 10) {
@@ -69,7 +77,7 @@ public class Paqueteria {
     // Parámetros: id (String).
     // Retorno: true si es válido, false si no lo es (o si es nulo).
 
-    public boolean validarIdentificador(String id) {
+    public static boolean validarIdentificador(String id) {
         // Verificar nulo
         if (id == null) {
             return false;
@@ -105,14 +113,14 @@ public class Paqueteria {
     // Capturar esa excepción específica y, en caso de error, devolver 0.
     // Retorno: La cantidad de paquetes por camión (int).
 
-    public int repartirCarga(int totalPaquetes, int camiones) {
-    try {
-        // División entera; si camiones es 0, Java lanzará ArithmeticException
-        return totalPaquetes / camiones;
-    } catch (ArithmeticException e) {
-        // Si ocurre división por cero, devolvemos 0 según las instrucciones
-        return 0;
+    public static int repartirCarga(int totalPaquetes, int camiones) {
+        try {
+            // División entera; si camiones es 0, Java lanzará ArithmeticException
+            return totalPaquetes / camiones;
+        } catch (ArithmeticException e) {
+            // Si ocurre división por cero, devolvemos 0 según las instrucciones
+            return 0;
+        }
     }
-}
 
 }
